@@ -1,5 +1,6 @@
 import streamlit as st
 import seaborn as sns
+from streamlit_drawable_canvas import st_canvas
 sns.set(style='dark')
 st.set_page_config(page_title= "AI Dalam Psikologi",page_icon="𝚿",layout= "wide")
 st.header("AI Dalam Psikologi 𝚿")
