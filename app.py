@@ -8,24 +8,25 @@ st.set_page_config(page_title= "AI Dalam Psikologi",page_icon="𝚿",layout= "wi
 st.header("AI Dalam Psikologi 𝚿")
 with st.container():
     st.title("🖍️ Tempat Menggambar")
-    
     st.write("Gunakan area di bawah ini untuk menggambar pohon rumah dan orang")
-    
-    # Pilihan warna dan ukuran kuas
-    stroke_color = st.color_picker("Pilih warna kuas:", "#000000")
-    stroke_width = st.slider("Ukuran kuas:", 1, 25, 5)
-    
-    # Tempat menggambar (canvas)
-    canvas_result = st_canvas(
-        fill_color="rgba(255, 255, 255, 1)",  # warna latar belakang
-        stroke_width=stroke_width,
-        stroke_color=stroke_color,
-        background_color="#FFFFFF",
-        height=400,
-        width=600,
-        drawing_mode="freedraw",  
-        key="canvas",
-    )
+
+    left_column, right_column = st.columns(2)
+    with right_column:
+        # Pilihan warna dan ukuran kuas
+        stroke_color = st.color_picker("Pilih warna kuas:", "#000000")
+        stroke_width = st.slider("Ukuran kuas:", 1, 25, 5)
+    with left_column:    
+        # Tempat menggambar (canvas)
+        canvas_result = st_canvas(
+            fill_color="rgba(255, 255, 255, 1)",  # warna latar belakang
+            stroke_width=stroke_width,
+            stroke_color=stroke_color,
+            background_color="#FFFFFF",
+            height=400,
+            width=600,
+            drawing_mode="freedraw",  
+            key="canvas",
+        )
     
     # Jika pengguna sudah menggambar sesuatu
     if canvas_result.image_data is not None:
@@ -36,7 +37,7 @@ with st.container():
             st.write("Sedang Mendeteksi")
     
     st.write("---")
-    st.info("Gunakan mouse atau jari (jika di HP/tablet) untuk menggambar.")
+
 with st.container():
     st.write("---")
     st.caption("agna aldhaka-contoh penggunaan cnn untuk deteksi gambar")
