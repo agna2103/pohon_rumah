@@ -45,7 +45,12 @@ def build_model():
 
     return model
 model = build_model()
-weights_path = "https://raw.githubusercontent.com/agna2103/pohon_rumah/main/bobot.weights.h5"
+# weights_path = "https://raw.githubusercontent.com/agna2103/pohon_rumah/main/bobot.weights.h5"
+weights_url = "https://raw.githubusercontent.com/agna2103/pohon_rumah/main/bobot.weights.h5"
+weights_path = "bobot.weights.h5"
+if not tf.io.gfile.exists(weights_path):
+        with open(weights_path, "wb") as f:
+            f.write(requests.get(weights_url).content)
 model.load_weights(weights_path)
 print("Model berhasil dibangun dan bobot dimuat")
 sns.set(style='dark')
