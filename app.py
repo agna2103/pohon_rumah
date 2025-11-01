@@ -18,7 +18,7 @@ gdown.download(url, quiet=False)
 model = load_model("handwriting_model.keras")
 with st.container():
 # Pastikan bisa digunakan langsung
-st.write(model.summary())
+    st.write(model.summary())
 
 
 sns.set(style='dark')
