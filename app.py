@@ -4,7 +4,8 @@ from streamlit_drawable_canvas import st_canvas
 from PIL import Image
 import tensorflow as tf
 from tensorflow.keras.preprocessing import image
-from tensorflow.keras.models import load_model
+from tensorflow.keras.applications import MobileNetV2
+from tensorflow.keras import layers, models
 import numpy as np
 import gdown
 import os
