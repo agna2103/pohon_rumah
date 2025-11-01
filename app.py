@@ -27,11 +27,12 @@ with st.container():
             drawing_mode="freedraw",  
             key="canvas",
         )
-    
-    # Jika pengguna sudah menggambar sesuatu
-    if canvas_result.image_data is not None:
-        st.image(canvas_result.image_data, caption="Hasil Gambar Anda")
-    
+     left_column, right_column = st.columns(2)
+    with right_column:
+        # Jika pengguna sudah menggambar sesuatu
+        if canvas_result.image_data is not None:
+            st.image(canvas_result.image_data, caption="Hasil Gambar Anda")
+    with left_column:
         # Tombol untuk mendeteksi Gambar
         if st.button("Deteksi Gambar"):
             st.write("Sedang Mendeteksi")
