@@ -11,16 +11,6 @@ import os
 import requests
 
 
-url = "https://drive.google.com/uc?id=1_e767LZyKTOb9ZfjKRrwl2YrxgshAn0B"  # ganti FILE_ID
-
-gdown.download(url, quiet=False)
-# Muat model
-model = load_model("handwriting_model.keras")
-with st.container():
-# Pastikan bisa digunakan langsung
-    st.write(model.summary())
-
-
 sns.set(style='dark')
 st.set_page_config(page_title= "AI Dalam Psikologi",page_icon="𝚿",layout= "wide")
 st.header("AI Dalam Psikologi 𝚿")
