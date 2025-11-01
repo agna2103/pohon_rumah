@@ -5,9 +5,18 @@ from PIL import Image
 import tensorflow as tf
 from tensorflow.keras.preprocessing import image
 import numpy as np
+import gdown
+import os
 
-model_url = 
-model = tf.keras.models.load_model(model_url)
+model_path = "handwriting_model.keras"
+
+if not os.path.exists(model_path):
+    file_id = "1_e767LZyKTOb9ZfjKRrwl2YrxgshAn0B"  # ganti dengan ID Drive 
+    url = f"https://drive.google.com/uc?id={file_id}"
+    gdown.download(url, model_path, quiet=False)
+
+# Load model
+model = tf.keras.models.load_model(model_path)
 
 sns.set(style='dark')
 st.set_page_config(page_title= "AI Dalam Psikologi",page_icon="𝚿",layout= "wide")
