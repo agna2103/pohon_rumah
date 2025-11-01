@@ -11,6 +11,39 @@ import gdown
 import os
 import requests
 
+def build_model():
+    # Bangun model dasar (pretrained)
+    base_model = MobileNetV2(
+        input_shape=(160, 160, 3),
+        include_top=False,
+        weights='imagenet'
+    )
+    
+    # Bekukan semua layer sementara
+    base_model.trainable = False
+
+    # Tambahkan lapisan kustom di atas base model
+    model = models.Sequential([
+        base_model,
+        layers.GlobalAveragePooling2D(),
+        layers.Dense(128, activation='relu'),
+        layers.Dropout(0.4),
+        layers.Dense(3, activation='softmax')  # 3 kelas: house, person, tree
+    ])
+
+    # Kompilasi model
+    model.compile(
+        optimizer='adam',
+        loss='categorical_crossentropy',
+        metrics=['accuracy']
+    )
+
+    # Fine-tuning parsial: aktifkan kembali sebagian layer setelah compile
+    base_model.trainable = True
+    for layer in base_model.layers[:100]:
+        layer.trainable = False
+
+    return model
 
 sns.set(style='dark')
 st.set_page_config(page_title= "AI Dalam Psikologi",page_icon="𝚿",layout= "wide")
