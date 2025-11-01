@@ -8,12 +8,7 @@ import numpy as np
 import gdown
 import os
 
-model_path = "handwriting_model.keras"
-
-if not os.path.exists(model_path):
-    file_id = "1_e767LZyKTOb9ZfjKRrwl2YrxgshAn0B"  # ganti dengan ID Drive 
-    url = f"https://drive.google.com/uc?id={file_id}"
-    gdown.download(url, model_path, quiet=False)
+model_path = "https://github.com/agna2103/pohon_rumah/handwriting_model.keras"
 
 # Load model
 model = tf.keras.models.load_model(model_path)
