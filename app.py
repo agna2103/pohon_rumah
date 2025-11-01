@@ -6,7 +6,9 @@ import tensorflow as tf
 from tensorflow.keras.preprocessing import image
 import numpy as np
 
-model = tf.keras.models.load_model("handwriting_model.keras")
+model_url = 
+model = tf.keras.models.load_model(model_url)
+
 sns.set(style='dark')
 st.set_page_config(page_title= "AI Dalam Psikologi",page_icon="𝚿",layout= "wide")
 st.header("AI Dalam Psikologi 𝚿")
