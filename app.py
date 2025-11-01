@@ -81,7 +81,31 @@ with st.container():
     with right_column:
         # Tombol untuk mendeteksi Gambar
         if st.button("Deteksi Gambar"):
-            st.write("Sedang Mendeteksi")
+            if canvas_result.image_data is not None:
+                    st.write("Sedang mendeteksi...")
+            
+                    # Konversi gambar hasil canvas ke format PIL
+                    img = Image.fromarray((canvas_result.image_data[:, :, :3]).astype(np.uint8))
+            
+                    # Ubah ukuran sesuai input model (160x160)
+                    img = img.resize((160, 160))
+            
+                    # Konversi ke array dan normalisasi
+                    img_array = image.img_to_array(img)
+                    img_array = img_array / 255.0
+                    img_array = np.expand_dims(img_array, axis=0)
+            
+                    # Prediksi
+                    pred = model.predict(img_array)
+                    class_names = ["house", "person", "tree"]
+            
+                    predicted_class = class_names[np.argmax(pred)]
+                    confidence = np.max(pred) * 100
+            
+                    # --- 4. Tampilkan hasil ---
+                    st.success(f"**Prediksi:** {predicted_class} ({confidence:.2f}% confidence)")
+                else:
+                    st.warning("Silakan gambar sesuatu dulu sebelum menekan tombol deteksi!")
     
     st.write("---")
 
