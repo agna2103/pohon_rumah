@@ -4,4 +4,5 @@ pandas
 seaborn
 streamlit
 streamlit_drawable_canvas
-
+tensorflow
+tensorflow.keras.preprocessing
