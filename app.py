@@ -28,11 +28,12 @@ with st.container():
             key="canvas",
         )
     left_column, right_column = st.columns(2)
-    with right_column:
+    with left_column:
         # Jika pengguna sudah menggambar sesuatu
         if canvas_result.image_data is not None:
-            st.image(canvas_result.image_data, caption="Hasil Gambar Anda")
-    with left_column:
+            st.write("Hasil Gambar")
+            st.image(canvas_result.image_data)
+    with right_column:
         # Tombol untuk mendeteksi Gambar
         if st.button("Deteksi Gambar"):
             st.write("Sedang Mendeteksi")
