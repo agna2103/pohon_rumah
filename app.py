@@ -11,19 +11,31 @@ import requests
 
 
 # URL model di GitHub (gunakan link RAW)
-model_url = "https://github.com/agna2103/pohon_rumah/raw/main/handwriting_model.keras"
-model_path = "handwriting_model.keras"
+# ✅ Pastikan URL RAW dari GitHub
+MODEL_URL = "https://github.com/agna2103/pohon_rumah/raw/main/handwriting_model.keras"
+MODEL_PATH = "handwriting_model.keras"
 
-# Unduh file jika belum ada
-if not os.path.exists(model_path):
+# 🔹 Unduh model hanya jika belum ada
+if not os.path.exists(MODEL_PATH):
     print("Mengunduh model dari GitHub...")
-    response = requests.get(model_url)
-    with open(model_path, "wb") as f:
-        f.write(response.content)
+    r = requests.get(MODEL_URL)
+    if r.status_code == 200:
+        with open(MODEL_PATH, "wb") as f:
+            f.write(r.content)
+        print("Model berhasil diunduh.")
+    else:
+        raise Exception(f"Gagal mengunduh model. Status: {r.status_code}")
 
-# Load model
-model = tf.keras.models.load_model(model_path)
-print("Model berhasil dimuat!")
+# 🔹 Coba load model dengan error handling
+try:
+    model = tf.keras.models.load_model(MODEL_PATH, compile=False)
+    print("✅ Model berhasil dimuat.")
+except Exception as e:
+    print("❌ Gagal memuat model:", str(e))
+    # --- Coba mode fallback ---
+    print("Mencoba memuat ulang model dengan custom input shape...")
+    model = tf.keras.models.load_model(MODEL_PATH, compile=False, safe_mode=False)
+
 
 
 sns.set(style='dark')
