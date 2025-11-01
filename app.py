@@ -45,7 +45,7 @@ def build_model():
 
     return model
 model = build_model()
-weights_path = "bobot.weights.h5"
+weights_path = "https://raw.githubusercontent.com/agna2103/pohon_rumah/main/bobot.weights.h5"
 model.load_weights(weights_path)
 print("Model berhasil dibangun dan bobot dimuat")
 sns.set(style='dark')
