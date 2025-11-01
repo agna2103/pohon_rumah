@@ -5,6 +5,7 @@ pandas
 seaborn
 streamlit
 streamlit_drawable_canvas
-
+gdown
+os
 
 
