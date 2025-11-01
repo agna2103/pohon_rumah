@@ -7,11 +7,24 @@ from tensorflow.keras.preprocessing import image
 import numpy as np
 import gdown
 import os
+import requests
 
-model_path = "https://github.com/agna2103/pohon_rumah/handwriting_model.keras"
+
+# URL model di GitHub (gunakan link RAW)
+model_url = "https://github.com/agna2103/pohon_rumah/raw/main/handwriting_model.keras"
+model_path = "handwriting_model.keras"
+
+# Unduh file jika belum ada
+if not os.path.exists(model_path):
+    print("Mengunduh model dari GitHub...")
+    response = requests.get(model_url)
+    with open(model_path, "wb") as f:
+        f.write(response.content)
 
 # Load model
 model = tf.keras.models.load_model(model_path)
+print("Model berhasil dimuat!")
+
 
 sns.set(style='dark')
 st.set_page_config(page_title= "AI Dalam Psikologi",page_icon="𝚿",layout= "wide")
