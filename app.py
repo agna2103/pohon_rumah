@@ -2,6 +2,10 @@ import streamlit as st
 import seaborn as sns
 from streamlit_drawable_canvas import st_canvas
 from PIL import Image
+import tensorflow as tf
+from tensorflow.keras.preprocessing import image
+import numpy as np
+
 
 sns.set(style='dark')
 st.set_page_config(page_title= "AI Dalam Psikologi",page_icon="𝚿",layout= "wide")
