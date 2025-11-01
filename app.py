@@ -1,8 +1,8 @@
 import streamlit as st
-
-
+import seaborn as sns
+sns.set(style='purple')
 st.set_page_config(page_title= "AI Dalam Psikologi",page_icon="𝚿",layout= "wide")
-st.write ("test")
+st.header("AI Dalam Psikologi 𝚿")
 
 with st.container():
     st.write("---")
