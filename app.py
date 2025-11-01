@@ -11,48 +11,44 @@ import gdown
 import os
 import requests
 
+
 def build_model():
-    # Bangun model dasar (pretrained)
+    # Gunakan weights=None agar tidak mengunduh bobot dari internet
     base_model = MobileNetV2(
         input_shape=(160, 160, 3),
         include_top=False,
-        weights='imagenet'
+        weights=None
     )
-    
-    # Bekukan semua layer sementara
-    base_model.trainable = False
+    base_model.trainable = False  # Bekukan fitur awal
 
-    # Tambahkan lapisan kustom di atas base model
     model = models.Sequential([
         base_model,
         layers.GlobalAveragePooling2D(),
         layers.Dense(128, activation='relu'),
         layers.Dropout(0.4),
-        layers.Dense(3, activation='softmax')  # 3 kelas: house, person, tree
+        layers.Dense(3, activation='softmax')
     ])
 
-    # Kompilasi model
-    model.compile(
-        optimizer='adam',
-        loss='categorical_crossentropy',
-        metrics=['accuracy']
-    )
-
-    # Fine-tuning parsial: aktifkan kembali sebagian layer setelah compile
-    base_model.trainable = True
-    for layer in base_model.layers[:100]:
-        layer.trainable = False
-
     return model
+
 model = build_model()
-# weights_path = "https://raw.githubusercontent.com/agna2103/pohon_rumah/main/bobot.weights.h5"
-#weights_url = "https://raw.githubusercontent.com/agna2103/pohon_rumah/main/bobot.weights.h5"
+
+# Unduh dan muat bobot
+import requests
+
+weights_url = "https://raw.githubusercontent.com/agna2103/pohon_rumah/main/bobot.weights.h5"
 weights_path = "bobot.weights.h5"
-#if not tf.io.gfile.exists(weights_path):
-#        with open(weights_path, "wb") as f:
-#            f.write(requests.get(weights_url).content)
-model.load_weights(weights_path)
-print("Model berhasil dibangun dan bobot dimuat")
+
+# Unduh bobot jika belum ada
+r = requests.get(weights_url)
+with open(weights_path, "wb") as f:
+    f.write(r.content)
+
+model.load_weights(weights_path, skip_mismatch=True)
+st.success("✅ Model berhasil dimuat")
+
+
+
 sns.set(style='dark')
 st.set_page_config(page_title= "AI Dalam Psikologi",page_icon="𝚿",layout= "wide")
 st.header("AI Dalam Psikologi 𝚿")
