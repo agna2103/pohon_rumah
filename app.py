@@ -104,8 +104,8 @@ with st.container():
             
                     # --- 4. Tampilkan hasil ---
                     st.success(f"**Prediksi:** {predicted_class} ({confidence:.2f}% confidence)")
-                else:
-                    st.warning("Silakan gambar sesuatu dulu sebelum menekan tombol deteksi!")
+            else:
+                st.warning("Silakan gambar sesuatu dulu sebelum menekan tombol deteksi!")
     
     st.write("---")
 
