@@ -4,38 +4,21 @@ from streamlit_drawable_canvas import st_canvas
 from PIL import Image
 import tensorflow as tf
 from tensorflow.keras.preprocessing import image
+from tensorflow.keras.models import load_model
 import numpy as np
 import gdown
 import os
 import requests
 
 
-# URL model di GitHub (gunakan link RAW)
-# ✅ Pastikan URL RAW dari GitHub
-MODEL_URL = "https://github.com/agna2103/pohon_rumah/raw/main/handwriting_model.keras"
-MODEL_PATH = "handwriting_model.keras"
+url = "https://drive.google.com/uc?id=1_e767LZyKTOb9ZfjKRrwl2YrxgshAn0B"  # ganti FILE_ID
 
-# 🔹 Unduh model hanya jika belum ada
-if not os.path.exists(MODEL_PATH):
-    print("Mengunduh model dari GitHub...")
-    r = requests.get(MODEL_URL)
-    if r.status_code == 200:
-        with open(MODEL_PATH, "wb") as f:
-            f.write(r.content)
-        print("Model berhasil diunduh.")
-    else:
-        raise Exception(f"Gagal mengunduh model. Status: {r.status_code}")
-
-# 🔹 Coba load model dengan error handling
-try:
-    model = tf.keras.models.load_model(MODEL_PATH, compile=False)
-    print("✅ Model berhasil dimuat.")
-except Exception as e:
-    print("❌ Gagal memuat model:", str(e))
-    # --- Coba mode fallback ---
-    print("Mencoba memuat ulang model dengan custom input shape...")
-    model = tf.keras.models.load_model(MODEL_PATH, compile=False, safe_mode=False)
-
+gdown.download(url, quiet=False)
+# Muat model
+model = load_model("handwriting_model.keras")
+with st.container():
+# Pastikan bisa digunakan langsung
+st.write(model.summary())
 
 
 sns.set(style='dark')
