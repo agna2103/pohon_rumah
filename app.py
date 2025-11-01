@@ -31,11 +31,9 @@ with st.container():
     if canvas_result.image_data is not None:
         st.image(canvas_result.image_data, caption="Hasil Gambar Anda")
     
-        # Tombol untuk menyimpan gambar
-        if st.button("💾 Simpan Gambar"):
-            img = Image.fromarray((canvas_result.image_data).astype("uint8"))
-            img.save("hasil_gambar.png")
-            st.success("Gambar disimpan sebagai hasil_gambar.png")
+        # Tombol untuk mendeteksi Gambar
+        if st.button("Deteksi Gambar"):
+            st.write("Sedang Mendeteksi")
     
     st.write("---")
     st.info("Gunakan mouse atau jari (jika di HP/tablet) untuk menggambar.")
