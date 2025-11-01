@@ -44,7 +44,9 @@ def build_model():
         layer.trainable = False
 
     return model
+model = build_model()
 weights_path = "bobot.weights.h5"
+model.load_weights(weights_path)
 print("Model berhasil dibangun dan bobot dimuat")
 sns.set(style='dark')
 st.set_page_config(page_title= "AI Dalam Psikologi",page_icon="𝚿",layout= "wide")
