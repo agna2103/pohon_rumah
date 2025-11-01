@@ -1,6 +1,8 @@
 import streamlit as st
 import seaborn as sns
 from streamlit_drawable_canvas import st_canvas
+from PIL import image
+
 sns.set(style='dark')
 st.set_page_config(page_title= "AI Dalam Psikologi",page_icon="𝚿",layout= "wide")
 st.header("AI Dalam Psikologi 𝚿")
@@ -21,7 +23,7 @@ with st.container():
         background_color="#FFFFFF",
         height=400,
         width=600,
-        drawing_mode="freedraw",  # bisa diubah ke "rect", "circle", "line", dll.
+        drawing_mode="freedraw",  
         key="canvas",
     )
     
